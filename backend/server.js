@@ -7,6 +7,7 @@ import ConnectDB from "./config/db.js";
 import userRouter from "./routes/user.routes.js";
 import slotRouter from "./routes/slots.routes.js";
 import CarsRouter from "./routes/cars.routes.js";
+import RecordRoutes from "./routes/records.routes.js";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.get('/', (req,res) =>{
 app.use("/api/users", userRouter);
 app.use("/api/slots", slotRouter);
 app.use("/api/cars", CarsRouter);
+app.use("/api/parking", RecordRoutes);
 
 app.listen(port , () =>{
     console.log(`Server is running on port:  http://localhost:${port}`);
