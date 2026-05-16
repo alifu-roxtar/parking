@@ -1,7 +1,4 @@
-// import CarsModel from "../models/carModel.js";
-// import slot from "../models/slotsModel.js";
 import ParkingRecordModel from "../models/parkingRecords.js";
-
 
 export const getParkingRecords = async(req, res) =>{
     const { userId } = req.params;
@@ -19,7 +16,7 @@ export const getParkingRecords = async(req, res) =>{
 export const deleteRecord = async(req,res) =>{
     const { id } = req.params;
     try {
-        const remove = await ParkingRecordModel.findByIdAndDelete({ id });
+        const remove = await ParkingRecordModel.findByIdAndDelete({ _id: id });
         return res.status(200).json({msg: "Record Removed Successfully", remove });
     } catch (error) {
         console.log(error);

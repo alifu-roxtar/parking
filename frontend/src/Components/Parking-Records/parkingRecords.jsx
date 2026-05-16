@@ -19,13 +19,25 @@ function ParkingRecords (){
         fetchRecords();
     }, [userId] );
 
+    const handleDeleteRecord = async (id) =>{
+        const confirmDelete = confirm("Are you sure to delete this record ?" );
+        if(!confirmDelete) return;
+        try{
+            const removeRecord = await API.delete(`/parking/delete/${id}`);
+            console.log(removeRecord);
+            window.location.reload(); 
+        }catch(error){
+            console.log(error);
+        }
+    }
+
     const exportToExcel = () => {
 
     const formattedData = records.map((record) => ({
 
-        DriverName: record.carID?.driverName,
+        DriverName: record.carID?.driverName ? record.carID?.driverName : "Car Removed",
 
-        PlateNumber: record.carID?.plateNumber,
+        PlateNumber: record.carID?.plateNumber ? record.carID?.plateNumber : "N/A",
 
         SlotNumber: record.slotID?.slotNumber,
 
@@ -37,7 +49,8 @@ function ParkingRecords (){
             ? new Date(record.exitTime).toLocaleString()
             : "Still Parked",
 
-        DurationMinutes: record.duration
+        DurationMinutes: record.duration == null ? "Still In Parking"
+                                         : record.duration
     }));
 
     // create worksheet
@@ -63,10 +76,10 @@ function ParkingRecords (){
     // create blob
     const data = new Blob(
         [excelBuffer],
-        {
-            type:
-                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
-        }
+        // {
+        //     type:
+        //         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8"
+        // }
     );
 
     saveAs(data, "ParkingRecords.xlsx");
@@ -89,7 +102,7 @@ function ParkingRecords (){
                     </button>
                 </div>
 
-                <div className="w-full max-w-5xl bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div className="w-full max-w-6xl bg-white rounded-2xl shadow-2xl overflow-hidden">
 
                     <table className="w-full text-left">
 
@@ -101,6 +114,7 @@ function ParkingRecords (){
                                 <th className="p-4 text-center">Slot Number</th>
                                 <th className="p-4 text-center">Entry Time</th>
                                 <th className="p-4 text-center">Exit Time</th>
+                                <th className="p-4 text-center">Duration</th>
                                 <th className="p-4 text-center">Action</th>
                             </tr>
 
@@ -118,11 +132,19 @@ function ParkingRecords (){
                                     >
 
                                         <td className="p-4 text-center">
-                                            {record.carID?.driverName}
+                                            {record.carID?.driverName ? (
+                                                record.carID?.driverName
+                                            ) : (
+                                                <span className="text-gray-400">Car Removed</span>
+                                            )}
                                         </td>
 
                                         <td className="p-4 text-center">
-                                            {record.carID?.plateNumber}
+                                            {record.carID?.plateNumber ? (
+                                                record.carID?.plateNumber
+                                            ) : (
+                                                <span className="text-gray-400">N/A</span>
+                                            )}
                                             
                                         </td>
                                             
@@ -139,19 +161,33 @@ function ParkingRecords (){
                                             {record.exitTime ? new Date(record.exitTime).toLocaleString() : 'N/A'}
                                         </td>
 
+                                        <td className="p-4 text-center">
+                                            {record.duration == null ? (
+
+                                            <span className="text-green-600 font-semibold">Still Parking</span>
+                                        ) : (
+                                            <span><b className="text-green-500">{record.duration}</b> Minutes</span>
+                                        )}
+                                        </td>
+
                                         <td className="p-4 flex justify-center gap-3">
+                                            { record.duration == null ? (
 
                                             <button
-                                                className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-1 rounded cursor-pointer"
+                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer"
                                             >
-                                                View
+                                                Remove In Parking
                                             </button>
+                                            ) : (
 
                                             <button
-                                                className="bg-red-500 hover:bg-red-700 text-white px-4 py-1 rounded cursor-pointer"
+                                                onClick={() => handleDeleteRecord(record._id)}
+                                                className="bg-red-500 hover:bg-red-700 text-white px-4 py-2 rounded cursor-pointer"
                                             >
-                                                Remove
+                                                Delete Record
                                             </button>
+                                            )
+                                            }
 
                                         </td>
 
