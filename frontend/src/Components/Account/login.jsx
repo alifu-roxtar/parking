@@ -7,6 +7,7 @@ import {
   FaParking,
   FaSpinner,
 } from "react-icons/fa";
+import logo from "../../assets/Images/logo.png";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -88,7 +89,7 @@ function Login() {
 
             <div className="flex justify-center mb-4">
               <img
-                src="/favicon.png"
+                src={logo}
                 alt="logo"
                 className="w-20 h-20"
               />
