@@ -11,13 +11,29 @@ function ParkingRecords (){
     const [ records, setRecords ] = useState([]);
     const { userId } = useParams();
 
-    useEffect(() =>{
-        const fetchRecords = async ()=>{
-            const res = await API.get(`/parking/records/${userId}`);
+    useEffect(() => {
+
+    if (!userId) return;
+
+    const fetchRecords = async () => {
+
+        try {
+
+            const res = await API.get(
+                `/parking/records/${userId}`
+            );
+
             setRecords(res.data);
+
+        } catch (error) {
+
+            console.log(error);
         }
-        fetchRecords();
-    }, [userId] );
+    };
+
+    fetchRecords();
+
+}, [userId]);
 
     const handleDeleteRecord = async (id) =>{
         const confirmDelete = confirm("Are you sure to delete this record ?" );
@@ -174,7 +190,9 @@ function ParkingRecords (){
                                             { record.duration == null ? (
 
                                             <button
-                                                className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded cursor-pointer"
+                                                disabled
+                                                title="Delete or Remove Car First"
+                                                className="bg-green-600 hover:bg-green-400/70 text-white px-4 py-2 rounded cursor-not-allowed"
                                             >
                                                 Remove In Parking
                                             </button>

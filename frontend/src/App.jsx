@@ -6,6 +6,7 @@ import Dashboard from "./Components/Account/dashboard";
 import Slots from "./Components/Slots/slots";
 import CarsPage from "./Components/Cars/cars";
 import ParkingRecord from "./Components/Parking-Records/parkingRecords";
+import PaymentRecords from "./Components/Payments/payments";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path={'/slots/:userId'} element={<Slots />} />
           <Route path={'/cars/:userId'} element={<CarsPage />} />
           <Route path={'/records/:userId'} element={<ParkingRecord />}/>
+          <Route path={"/payments/:userId"} element={<PaymentRecords />} />
         </Routes>
       </Router>
     </div>

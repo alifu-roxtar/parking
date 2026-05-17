@@ -54,7 +54,7 @@ function SideBar() {
                   <Link to={`/slots/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaParking className="inline mr-2 text-red-900" />Slots</Link>
                   <Link to={`/cars/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaCar className="inline mr-2 text-purple-500" />Cars</Link>
                   <Link to={`/records/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaClipboardList className="inline mr-2 text-yellow-300" />Parking Records</Link>
-                  <Link to={'/home'} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaCreditCard className="inline mr-2 text-green-400" />Payments</Link>
+                  <Link to={`/payments/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaCreditCard className="inline mr-2 text-green-400" />Payments</Link>
 
               </div>
               <div className="mt-15 ml-5">

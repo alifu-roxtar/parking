@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../Services/api";
 import { FaArrowRight, FaCar, FaClipboardList, FaParking } from "react-icons/fa";
+import Footer from "../../Pages/footer";
 
 function Dashboard(){
     const [ user, setUser ] = useState([]);
@@ -99,17 +100,18 @@ function Dashboard(){
                           </div>
                        </Cards>
                        <Cards>
-                          <Link to={`/records/${user.id}`} className="text-white font-bold text-xl m-3"><FaClipboardList className="inline text-xl mr-1 text-green-500"/>Payments Records</Link>
-                          <span className="text-center text-lg m-1 text-gray-300">Track & Manage All Payment Transactions Performed.</span>
+                          <Link to={`/records/${user.id}`} className="text-white font-bold text-xl m-3"><FaClipboardList className="inline text-xl mr-1 text-green-500"/>Parking Records</Link>
+                          <span className="text-center text-lg m-1 text-gray-300">Track & Manage All Parking Reservations Performed.</span>
                           <div className="flex mt-2 flex-row gap-5">
                              <p className="m-auto flex text-sm h-6 w-6 bg-blue-500 rounded-full text-white border justify-center">{records.length}</p>
-                             <span className="-ml-12.5 text-sm text-white">Successful Payments.</span>
+                             <span className="-ml-12.5 text-sm text-white">Successful Parking.</span>
                              <Link to={`/records/${user.id}`} className="text-end inline m-auto text-white text-sm hover:scale-95 transition-all duration-200">View <FaArrowRight className="inline text-sm" /></Link>
                           </div>
                        </Cards>
                     </div>
                 </div>
             </div>
+                <Footer />
         </div>
     )
 };
