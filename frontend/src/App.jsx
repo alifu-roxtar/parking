@@ -7,13 +7,15 @@ import Slots from "./Components/Slots/slots";
 import CarsPage from "./Components/Cars/cars";
 import ParkingRecord from "./Components/Parking-Records/parkingRecords";
 import PaymentRecords from "./Components/Payments/payments";
+import LandingPage from "./Pages/home";
 
 function App() {
   return (
     <div>
       <Router>
         <Routes>
-          <Route path="/" element={<Register />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path={'/slots/:userId'} element={<Slots />} />
