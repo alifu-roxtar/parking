@@ -6,6 +6,8 @@ import {
   FaClock,
   FaArrowRight,
 } from "react-icons/fa";
+import logo from "../assets/Images/logo.png";
+import lll from "../assets/Images/lll.png";
 
 function LandingPage() {
   return (
@@ -16,7 +18,7 @@ function LandingPage() {
         
         <div className="flex items-center gap-3">
           <img
-            src="/favicon.png"
+            src={logo}
             alt="logo"
             className="w-12 h-12 rounded-full"
           />
@@ -49,7 +51,7 @@ function LandingPage() {
       <section className="flex flex-col justify-center items-center text-center px-6 py-20">
 
         <img
-          src="/favicon.png"
+          src={lll}
           alt="parking logo"
           className="w-40 h-40 mb-8 drop-shadow-2xl"
         />
