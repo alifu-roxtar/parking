@@ -1,70 +1,217 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import API from "../Services/api";
+import {
+  FaHome, FaCar, FaParking, FaClipboardList,
+  FaCreditCard, FaSignOutAlt, FaChevronRight
+} from "react-icons/fa";
 
-import { FaHome, FaCar, FaParking, FaClipboardList, FaCreditCard, FaSignOutAlt } from "react-icons/fa";
+const NAV_ITEMS = (id) => [
+  { to: "/dashboard",      icon: <FaHome />,          label: "Dashboard",       accent: "#f59e0b" },
+  { to: `/slots/${id}`,    icon: <FaParking />,        label: "Slots",           accent: "#3b82f6" },
+  { to: `/cars/${id}`,     icon: <FaCar />,            label: "Cars",            accent: "#a855f7" },
+  { to: `/records/${id}`,  icon: <FaClipboardList />,  label: "Parking Records", accent: "#10b981" },
+  { to: `/payments/${id}`, icon: <FaCreditCard />,     label: "Payments",        accent: "#f43f5e" },
+];
+
+function NavLink({ item, active }) {
+  return (
+    <Link
+      to={item.to}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "12px",
+        padding: "11px 14px",
+        borderRadius: "10px",
+        textDecoration: "none",
+        position: "relative",
+        transition: "all 0.18s ease",
+        background: active ? "rgba(255,255,255,0.07)" : "transparent",
+        color: active ? "#fff" : "rgba(255,255,255,0.55)",
+        fontWeight: active ? 600 : 400,
+      }}
+      onMouseEnter={e => {
+        if (!active) e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+        e.currentTarget.style.color = "#fff";
+      }}
+      onMouseLeave={e => {
+        if (!active) {
+          e.currentTarget.style.background = "transparent";
+          e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+        }
+      }}
+    >
+      {/* Active indicator bar */}
+      {active && (
+        <span style={{
+          position: "absolute",
+          left: 0,
+          top: "20%",
+          height: "60%",
+          width: "3px",
+          borderRadius: "0 3px 3px 0",
+          background: item.accent,
+        }} />
+      )}
+
+      {/* Icon */}
+      <span style={{
+        fontSize: "16px",
+        color: active ? item.accent : "inherit",
+        transition: "color 0.18s ease",
+        flexShrink: 0,
+      }}>
+        {item.icon}
+      </span>
+
+      {/* Label */}
+      <span style={{ fontSize: "14px", letterSpacing: "0.01em", flex: 1 }}>
+        {item.label}
+      </span>
+
+      {/* Chevron */}
+      {active && (
+        <FaChevronRight style={{ fontSize: "10px", opacity: 0.5 }} />
+      )}
+    </Link>
+  );
+}
 
 function SideBar() {
-    const [ user, setUser ] = useState(null);
-    const navigate = useNavigate();
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() =>{
-        const fetchUser = async () =>{
-            try {
-                const token = localStorage.getItem("token");
-                if(!token) {
-                    navigate("/login");
-                    return;
-                }
-                const res = await API.get("/users/me", { headers: { Authorization: token } });
-                setUser(res.data.user);
-            } catch (error) {
-                console.error(error);
-                navigate("/login");
-            }
-        };
-        fetchUser();
-    }, [navigate]);
-
-    const avatar = user ? user.username.charAt(0).toUpperCase() : "";
-
-    const handleLogout = () =>{
-        const confirmLogout = window.confirm("Are you sure you want to logout?");
-        if(!confirmLogout) return;
-        localStorage.removeItem("token");
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) { navigate("/login"); return; }
+        const res = await API.get("/users/me", { headers: { Authorization: token } });
+        setUser(res.data.user);
+      } catch {
         navigate("/login");
+      }
     };
+    fetchUser();
+  }, [navigate]);
 
-    return (
+  const handleLogout = () => {
+    if (!window.confirm("Are you sure you want to logout?")) return;
+    localStorage.removeItem("token");
+    navigate("/login");
+  };
 
-    <div className="fixed h-screen w-70 bg-blue-900 gap-4">
-        <div className="flex mt-8 p-2 ml-3 flex-col">
-            <h1 className="text-white text-4xl font-bold mb-2">SPS</h1>
-            <span className="text-sm font-semibold text-gray-400 mb-3 -mt-1.25">Smart Parking System.</span>
-            <h1 className="text-blue-500 text-2xl">Hello, <span className="text-2xl font-bold text-white/80">{user?.username}</span></h1>
-            <div className="mt-4 p-3 flex">
-                <span className="h-15 w-15 text-white border-2 rounded-full flex bg-green-600 text-2xl font-bold justify-center items-center">{avatar}</span>
-                <p className="mt-5 ml-2 text-gray-400 text-xl font-semibold">{user?.username}</p><br /><br />
-            </div>
-            <div>
-                <p className="ml-1 text-gray-400 text-xl font-semibold">{user?.email}</p>
-            </div>
-            <div className="flex flex-col gap-4 mt-10">
-                  <Link to={'/dashboard'} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaHome className="inline mr-2 text-amber-600" />Home</Link>
-                  <Link to={`/slots/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaParking className="inline mr-2 text-red-900" />Slots</Link>
-                  <Link to={`/cars/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaCar className="inline mr-2 text-purple-500" />Cars</Link>
-                  <Link to={`/records/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaClipboardList className="inline mr-2 text-yellow-300" />Parking Records</Link>
-                  <Link to={`/payments/${user?.id}`} className="text-white text-2xl font-semibold hover:scale-105 transition-all duration-200"><FaCreditCard className="inline mr-2 text-green-400" />Payments</Link>
+  const avatar = user?.username?.charAt(0).toUpperCase() ?? "";
+  const navItems = NAV_ITEMS(user?.id);
 
-              </div>
-              <div className="mt-15 ml-5">
-                <button onClick={handleLogout} className="text-white hover:scale-105 text-lg font-semibold group h-12 bg-amber-950 px-4 rounded-3xl cursor-pointer">Log Out<FaSignOutAlt className="inline ml-2 group-hover:rotate-180 transition-transform duration-150" /></button>
-              </div>
+  return (
+    <aside style={{
+      position: "fixed",
+      top: 0,
+      left: 0,
+      height: "100vh",
+      width: "240px",
+      background: "linear-gradient(180deg, #0f172a 0%, #0c1628 100%)",
+      borderRight: "1px solid rgba(255,255,255,0.06)",
+      display: "flex",
+      flexDirection: "column",
+      fontFamily: "'DM Sans', sans-serif",
+      zIndex: 100,
+    }}>
+
+      {/* ── Logo ── */}
+      <div style={{ padding: "28px 20px 24px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "2px" }}>
+          <div style={{
+            width: "30px", height: "30px", borderRadius: "8px",
+            background: "linear-gradient(135deg, #3b82f6, #6366f1)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "13px", fontWeight: 800, color: "#fff",
+            flexShrink: 0,
+          }}>S</div>
+          <span style={{ color: "#fff", fontSize: "18px", fontWeight: 700, letterSpacing: "-0.02em" }}>SPS</span>
         </div>
-    </div>
+        <p style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px", marginTop: "4px", paddingLeft: "40px", letterSpacing: "0.04em" }}>
+          Smart Parking System
+        </p>
+      </div>
 
-    )
+      {/* ── User card ── */}
+      <div style={{ padding: "20px 16px", borderBottom: "1px solid rgba(255,255,255,0.06)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div style={{
+            width: "40px", height: "40px", borderRadius: "50%",
+            background: "linear-gradient(135deg, #10b981, #059669)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            fontSize: "15px", fontWeight: 700, color: "#fff",
+            flexShrink: 0, border: "2px solid rgba(16,185,129,0.3)",
+          }}>
+            {avatar}
+          </div>
+          <div style={{ overflow: "hidden" }}>
+            <p style={{ color: "#fff", fontSize: "13px", fontWeight: 600, margin: 0, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              {user?.username ?? "Loading…"}
+            </p>
+            <p style={{ color: "rgba(255,255,255,0.35)", fontSize: "11px", margin: "2px 0 0", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+              {user?.email ?? ""}
+            </p>
+          </div>
+        </div>
+      </div>
 
+      {/* ── Navigation ── */}
+      <nav style={{ flex: 1, padding: "16px 10px", display: "flex", flexDirection: "column", gap: "2px", overflowY: "auto" }}>
+        <p style={{ color: "rgba(255,255,255,0.2)", fontSize: "10px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "8px", paddingLeft: "14px" }}>
+          Menu
+        </p>
+        {navItems.map((item) => (
+          <NavLink
+            key={item.to}
+            item={item}
+            active={location.pathname === item.to || location.pathname.startsWith(item.to + "/")}
+          />
+        ))}
+      </nav>
+
+      {/* ── Logout ── */}
+      <div style={{ padding: "16px 10px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+        <button
+          onClick={handleLogout}
+          style={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            gap: "12px",
+            padding: "11px 14px",
+            borderRadius: "10px",
+            border: "none",
+            background: "transparent",
+            color: "rgba(255,255,255,0.4)",
+            fontSize: "14px",
+            cursor: "pointer",
+            transition: "all 0.18s ease",
+            textAlign: "left",
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.background = "rgba(244,63,94,0.1)";
+            e.currentTarget.style.color = "#f43f5e";
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.color = "rgba(255,255,255,0.4)";
+          }}
+        >
+          <FaSignOutAlt style={{ fontSize: "15px", flexShrink: 0 }} />
+          <span style={{ fontWeight: 500 }}>Log Out</span>
+        </button>
+      </div>
+
+      {/* Google font */}
+      <style>{`@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');`}</style>
+    </aside>
+  );
 }
 
 export default SideBar;
