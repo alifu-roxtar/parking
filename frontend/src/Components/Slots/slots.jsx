@@ -27,12 +27,9 @@ function Slots() {
         if (!userId) return;
 
         const fetchSlots = async () => {
-
             try {
-
                 const res = await API.get(`/slots/user/${userId}`);
                 setSlots(res.data);
-
             } catch (error) {
                 console.error("Error fetching slots:", error);
             }
@@ -79,12 +76,10 @@ function Slots() {
 
     // EDIT
     const openEditModal = (slot) => {
-
         setEditSlot(slot);
         setEditSlotNumber(slot.slotNumber);
         setEditSlotStatus(slot.slotStatus);
         setIsEditModal(true);
-
     };
 
     const closeEditModal = () => {
@@ -140,7 +135,7 @@ function Slots() {
 
     return (
 
-        <div className="flex min-h-screen bg-gray-50">
+        <div className="flex min-h-screen bg-[#0f172a]">
 
             <SideBar />
 
@@ -149,11 +144,11 @@ function Slots() {
                 {/* PAGE HEADER */}
                 <div className="mb-8">
 
-                    <h1 className="text-2xl font-bold text-gray-800">
+                    <h1 className="text-2xl font-bold text-white">
                         Parking Slots
                     </h1>
 
-                    <p className="text-gray-500 mt-1">
+                    <p className="text-slate-400 mt-1 text-sm">
                         Manage and monitor all parking slots in your facility
                     </p>
 
@@ -162,25 +157,26 @@ function Slots() {
                 {/* STATS CARDS */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 mb-8">
 
-                    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+                    {/* Total Slots */}
+                    <div className="bg-slate-800 rounded-xl border border-slate-700 p-5">
 
                         <div className="flex items-center justify-between">
 
                             <div>
 
-                                <p className="text-sm font-medium text-gray-500">
+                                <p className="text-sm font-medium text-slate-400">
                                     Total Slots
                                 </p>
 
-                                <p className="text-3xl font-bold text-gray-800 mt-1">
+                                <p className="text-3xl font-bold text-white mt-1">
                                     {totalSlots}
                                 </p>
 
                             </div>
 
-                            <div className="h-12 w-12 bg-blue-50 rounded-lg flex items-center justify-center">
+                            <div className="h-12 w-12 bg-blue-500/15 rounded-lg flex items-center justify-center">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
                                 </svg>
 
@@ -190,25 +186,26 @@ function Slots() {
 
                     </div>
 
-                    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+                    {/* Available Slots */}
+                    <div className="bg-slate-800 rounded-xl border border-slate-700 p-5">
 
                         <div className="flex items-center justify-between">
 
                             <div>
 
-                                <p className="text-sm font-medium text-gray-500">
-                                    Available
+                                <p className="text-sm font-medium text-slate-400">
+                                    Available Slots
                                 </p>
 
-                                <p className="text-3xl font-bold text-emerald-600 mt-1">
+                                <p className="text-3xl font-bold text-emerald-400 mt-1">
                                     {availableSlots}
                                 </p>
 
                             </div>
 
-                            <div className="h-12 w-12 bg-emerald-50 rounded-lg flex items-center justify-center">
+                            <div className="h-12 w-12 bg-emerald-500/15 rounded-lg flex items-center justify-center">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                 </svg>
 
@@ -218,25 +215,26 @@ function Slots() {
 
                     </div>
 
-                    <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm hover:shadow-md transition-shadow">
+                    {/* Occupied Slots */}
+                    <div className="bg-slate-800 rounded-xl border border-slate-700 p-5">
 
                         <div className="flex items-center justify-between">
 
                             <div>
 
-                                <p className="text-sm font-medium text-gray-500">
-                                    Occupied
+                                <p className="text-sm font-medium text-slate-400">
+                                    Occupied Slots
                                 </p>
 
-                                <p className="text-3xl font-bold text-red-500 mt-1">
+                                <p className="text-3xl font-bold text-red-400 mt-1">
                                     {occupiedSlots}
                                 </p>
 
                             </div>
 
-                            <div className="h-12 w-12 bg-red-50 rounded-lg flex items-center justify-center">
+                            <div className="h-12 w-12 bg-red-500/15 rounded-lg flex items-center justify-center">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
 
@@ -253,9 +251,9 @@ function Slots() {
 
                     <div className="flex items-center gap-2">
 
-                        <div className="h-8 w-1 bg-blue-600 rounded-full"></div>
+                        <div className="h-7 w-1 bg-blue-500 rounded-full"></div>
 
-                        <h2 className="text-lg font-semibold text-gray-800">
+                        <h2 className="text-lg font-semibold text-white">
                             All Slots
                         </h2>
 
@@ -265,7 +263,7 @@ function Slots() {
 
                         <button
                             onClick={() => setViewSchema(true)}
-                            className="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition cursor-pointer"
+                            className="inline-flex items-center gap-2 bg-slate-800 border border-slate-700 text-slate-300 hover:bg-slate-700 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
@@ -275,7 +273,7 @@ function Slots() {
 
                         <button
                             onClick={() => setShowAddSlotForm(true)}
-                            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium shadow-sm transition cursor-pointer"
+                            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-medium transition cursor-pointer"
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -288,23 +286,23 @@ function Slots() {
                 </div>
 
                 {/* TABLE CARD */}
-                <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+                <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
 
                     <table className="w-full text-left">
 
                         <thead>
 
-                            <tr className="bg-gray-50 border-b border-gray-200">
+                            <tr className="bg-slate-900/50 border-b border-slate-700">
 
-                                <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">
+                                <th className="px-6 py-3.5 text-xs font-semibold text-slate-400 uppercase tracking-wider text-center">
                                     Slot
                                 </th>
 
-                                <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">
+                                <th className="px-6 py-3.5 text-xs font-semibold text-slate-400 uppercase tracking-wider text-center">
                                     Status
                                 </th>
 
-                                <th className="px-6 py-3 text-xs font-semibold text-gray-500 uppercase tracking-wider text-center">
+                                <th className="px-6 py-3.5 text-xs font-semibold text-slate-400 uppercase tracking-wider text-center">
                                     Actions
                                 </th>
 
@@ -312,7 +310,7 @@ function Slots() {
 
                         </thead>
 
-                        <tbody className="divide-y divide-gray-100">
+                        <tbody className="divide-y divide-slate-700/50">
 
                             {slots.length > 0 ? (
 
@@ -320,12 +318,12 @@ function Slots() {
 
                                     <tr
                                         key={slot._id}
-                                        className="hover:bg-gray-50 transition-colors"
+                                        className="hover:bg-slate-700/30 transition-colors"
                                     >
 
                                         <td className="px-6 py-4 text-center">
 
-                                            <span className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-1 rounded-md text-sm font-semibold">
+                                            <span className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-400 px-3 py-1 rounded-md text-sm font-semibold">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -340,16 +338,16 @@ function Slots() {
                                             <span
                                                 className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold ${
                                                     slot.slotStatus
-                                                        ? "bg-emerald-50 text-emerald-700"
-                                                        : "bg-red-50 text-red-700"
+                                                        ? "bg-emerald-500/15 text-emerald-400"
+                                                        : "bg-red-500/15 text-red-400"
                                                 }`}
                                             >
 
                                                 <span
                                                     className={`h-1.5 w-1.5 rounded-full ${
                                                         slot.slotStatus
-                                                            ? "bg-emerald-500"
-                                                            : "bg-red-500"
+                                                            ? "bg-emerald-400"
+                                                            : "bg-red-400"
                                                     }`}
                                                 ></span>
 
@@ -367,7 +365,7 @@ function Slots() {
 
                                                 <button
                                                     onClick={() => openViewModal(slot)}
-                                                    className="inline-flex items-center gap-1 text-blue-600 hover:bg-blue-50 px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer"
+                                                    className="inline-flex items-center gap-1 text-blue-400 hover:bg-blue-500/10 px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -378,7 +376,7 @@ function Slots() {
 
                                                 <button
                                                     onClick={() => openEditModal(slot)}
-                                                    className="inline-flex items-center gap-1 text-amber-600 hover:bg-amber-50 px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer"
+                                                    className="inline-flex items-center gap-1 text-amber-400 hover:bg-amber-500/10 px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -388,7 +386,7 @@ function Slots() {
 
                                                 <button
                                                     onClick={() => handleDelete(slot._id)}
-                                                    className="inline-flex items-center gap-1 text-red-600 hover:bg-red-50 px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer"
+                                                    className="inline-flex items-center gap-1 text-red-400 hover:bg-red-500/10 px-3 py-1.5 rounded-md text-sm font-medium transition cursor-pointer"
                                                 >
                                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                         <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -412,9 +410,9 @@ function Slots() {
 
                                         <div className="flex flex-col items-center gap-4">
 
-                                            <div className="h-20 w-20 bg-gray-100 rounded-full flex items-center justify-center">
+                                            <div className="h-20 w-20 bg-slate-700/50 rounded-full flex items-center justify-center">
 
-                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                                 </svg>
@@ -423,19 +421,19 @@ function Slots() {
 
                                             <div className="text-center">
 
-                                                <h3 className="text-lg font-semibold text-gray-700">
-                                                    No Parking Slots Yet
+                                                <h3 className="text-lg font-semibold text-slate-300">
+                                                    No parking slots yet
                                                 </h3>
 
-                                                <p className="text-sm text-gray-400 mt-1 max-w-sm">
-                                                    Create your first parking slot to start managing your parking facility.
+                                                <p className="text-sm text-slate-500 mt-1 max-w-sm">
+                                                    Start by adding the first parking slot to your facility
                                                 </p>
 
                                             </div>
 
                                             <button
                                                 onClick={() => setShowAddSlotForm(true)}
-                                                className="mt-2 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-sm transition cursor-pointer"
+                                                className="mt-2 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer"
                                             >
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -463,20 +461,20 @@ function Slots() {
 
                 {viewSchema && (
 
-                    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
 
-                        <div className="bg-white rounded-2xl w-full max-w-5xl max-h-[85vh] overflow-y-auto shadow-2xl">
+                        <div className="bg-slate-800 rounded-2xl w-full max-w-5xl max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-700">
 
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                            <div className="flex items-center justify-between p-6 border-b border-slate-700">
 
                                 <div>
 
-                                    <h2 className="text-xl font-bold text-gray-800">
+                                    <h2 className="text-xl font-bold text-white">
                                         Parking Layout
                                     </h2>
 
-                                    <p className="text-sm text-gray-400 mt-0.5">
+                                    <p className="text-sm text-slate-400 mt-0.5">
                                         Visual overview of all parking slots
                                     </p>
 
@@ -484,7 +482,7 @@ function Slots() {
 
                                 <button
                                     onClick={() => setViewSchema(false)}
-                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition cursor-pointer"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -504,10 +502,10 @@ function Slots() {
 
                                             <div
                                                 key={slot._id}
-                                                className={`rounded-xl p-4 border-2 transition-all hover:scale-[1.03] hover:shadow-md ${
+                                                className={`rounded-xl p-4 border transition-all hover:scale-[1.03] hover:shadow-lg ${
                                                     slot.slotStatus
-                                                        ? "bg-emerald-50 border-emerald-200"
-                                                        : "bg-red-50 border-red-200"
+                                                        ? "bg-emerald-500/10 border-emerald-500/30 hover:border-emerald-500/50"
+                                                        : "bg-red-500/10 border-red-500/30 hover:border-red-500/50"
                                                 }`}
                                             >
 
@@ -515,15 +513,15 @@ function Slots() {
 
                                                     <div className="flex items-center justify-between">
 
-                                                        <h3 className="font-bold text-gray-800">
+                                                        <h3 className="font-bold text-white">
                                                             Slot {slot.slotNumber}
                                                         </h3>
 
                                                         <span
                                                             className={`h-2.5 w-2.5 rounded-full ${
                                                                 slot.slotStatus
-                                                                    ? "bg-emerald-500"
-                                                                    : "bg-red-500"
+                                                                    ? "bg-emerald-400"
+                                                                    : "bg-red-400"
                                                             }`}
                                                         ></span>
 
@@ -532,8 +530,8 @@ function Slots() {
                                                     <span
                                                         className={`text-xs font-semibold px-2.5 py-1 rounded-full w-fit ${
                                                             slot.slotStatus
-                                                                ? "bg-emerald-100 text-emerald-700"
-                                                                : "bg-red-100 text-red-700"
+                                                                ? "bg-emerald-500/15 text-emerald-400"
+                                                                : "bg-red-500/15 text-red-400"
                                                         }`}
                                                     >
                                                         {slot.slotStatus
@@ -541,7 +539,7 @@ function Slots() {
                                                             : "Occupied"}
                                                     </span>
 
-                                                    <p className="text-xs text-gray-500">
+                                                    <p className="text-xs text-slate-400">
                                                         {slot.slotStatus
                                                             ? "Ready for parking"
                                                             : "Currently occupied"}
@@ -559,9 +557,9 @@ function Slots() {
 
                                     <div className="flex flex-col items-center justify-center py-16 gap-4">
 
-                                        <div className="h-20 w-20 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <div className="h-20 w-20 bg-slate-700/50 rounded-full flex items-center justify-center">
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" />
                                             </svg>
 
@@ -569,11 +567,11 @@ function Slots() {
 
                                         <div className="text-center">
 
-                                            <h3 className="text-lg font-semibold text-gray-700">
+                                            <h3 className="text-lg font-semibold text-slate-300">
                                                 No Layout Available
                                             </h3>
 
-                                            <p className="text-sm text-gray-400 mt-1">
+                                            <p className="text-sm text-slate-500 mt-1">
                                                 Add parking slots first to see the layout.
                                             </p>
 
@@ -584,7 +582,7 @@ function Slots() {
                                                 setViewSchema(false);
                                                 setShowAddSlotForm(true);
                                             }}
-                                            className="mt-2 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium shadow-sm transition cursor-pointer"
+                                            className="mt-2 inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition cursor-pointer"
                                         >
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -608,20 +606,20 @@ function Slots() {
 
                 {showAddSlotForm && (
 
-                    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
 
-                        <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+                        <div className="bg-slate-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-700">
 
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                            <div className="flex items-center justify-between p-6 border-b border-slate-700">
 
                                 <div>
 
-                                    <h2 className="text-lg font-bold text-gray-800">
+                                    <h2 className="text-lg font-bold text-white">
                                         Add Parking Slot
                                     </h2>
 
-                                    <p className="text-sm text-gray-400 mt-0.5">
+                                    <p className="text-sm text-slate-400 mt-0.5">
                                         Create a new slot in your facility
                                     </p>
 
@@ -629,7 +627,7 @@ function Slots() {
 
                                 <button
                                     onClick={() => setShowAddSlotForm(false)}
-                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition cursor-pointer"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -645,14 +643,14 @@ function Slots() {
 
                                     <div>
 
-                                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                        <label className="block text-sm font-medium text-slate-300 mb-1.5">
                                             Slot Number
                                         </label>
 
                                         <input
                                             value={newSlotNumber}
                                             onChange={(e) => setNewSlotNumber(e.target.value)}
-                                            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                                            className="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                                             placeholder="e.g. A1, B2, C3"
                                             required
                                         />
@@ -662,19 +660,19 @@ function Slots() {
                                 </div>
 
                                 {/* Modal Footer */}
-                                <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+                                <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-700">
 
                                     <button
                                         type="button"
                                         onClick={() => setShowAddSlotForm(false)}
-                                        className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+                                        className="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-700 hover:text-white transition cursor-pointer"
                                     >
                                         Cancel
                                     </button>
 
                                     <button
                                         type="submit"
-                                        className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium shadow-sm transition cursor-pointer"
+                                        className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition cursor-pointer"
                                     >
                                         Add Slot
                                     </button>
@@ -693,20 +691,20 @@ function Slots() {
 
                 {isViewModal && selectedSlot && (
 
-                    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
 
-                        <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+                        <div className="bg-slate-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-700">
 
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                            <div className="flex items-center justify-between p-6 border-b border-slate-700">
 
-                                <h2 className="text-lg font-bold text-gray-800">
+                                <h2 className="text-lg font-bold text-white">
                                     Slot Details
                                 </h2>
 
                                 <button
                                     onClick={closeViewModal}
-                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition cursor-pointer"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -721,19 +719,19 @@ function Slots() {
                                 {/* Slot Visual Card */}
                                 <div className={`rounded-xl p-5 border-2 ${
                                     selectedSlot.slotStatus
-                                        ? "bg-emerald-50 border-emerald-200"
-                                        : "bg-red-50 border-red-200"
+                                        ? "bg-emerald-500/10 border-emerald-500/30"
+                                        : "bg-red-500/10 border-red-500/30"
                                 }`}>
 
                                     <div className="flex items-center justify-between">
 
                                         <div>
 
-                                            <p className="text-sm text-gray-500">
+                                            <p className="text-sm text-slate-400">
                                                 Slot Number
                                             </p>
 
-                                            <p className="text-2xl font-bold text-gray-800 mt-0.5">
+                                            <p className="text-2xl font-bold text-white mt-0.5">
                                                 {selectedSlot.slotNumber}
                                             </p>
 
@@ -741,14 +739,14 @@ function Slots() {
 
                                         <div className={`h-14 w-14 rounded-xl flex items-center justify-center ${
                                             selectedSlot.slotStatus
-                                                ? "bg-emerald-100"
-                                                : "bg-red-100"
+                                                ? "bg-emerald-500/20"
+                                                : "bg-red-500/20"
                                         }`}>
 
                                             <svg xmlns="http://www.w3.org/2000/svg" className={`h-7 w-7 ${
                                                 selectedSlot.slotStatus
-                                                    ? "text-emerald-600"
-                                                    : "text-red-600"
+                                                    ? "text-emerald-400"
+                                                    : "text-red-400"
                                             }`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -761,25 +759,25 @@ function Slots() {
                                 </div>
 
                                 {/* Status Detail */}
-                                <div className="flex items-center justify-between bg-gray-50 rounded-lg p-4">
+                                <div className="flex items-center justify-between bg-slate-900/50 rounded-lg p-4 border border-slate-700">
 
-                                    <span className="text-sm font-medium text-gray-600">
+                                    <span className="text-sm font-medium text-slate-400">
                                         Current Status
                                     </span>
 
                                     <span
                                         className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${
                                             selectedSlot.slotStatus
-                                                ? "bg-emerald-100 text-emerald-700"
-                                                : "bg-red-100 text-red-700"
+                                                ? "bg-emerald-500/15 text-emerald-400"
+                                                : "bg-red-500/15 text-red-400"
                                         }`}
                                     >
 
                                         <span
                                             className={`h-1.5 w-1.5 rounded-full ${
                                                 selectedSlot.slotStatus
-                                                    ? "bg-emerald-500"
-                                                    : "bg-red-500"
+                                                    ? "bg-emerald-400"
+                                                    : "bg-red-400"
                                             }`}
                                         ></span>
 
@@ -798,7 +796,7 @@ function Slots() {
 
                                 <button
                                     onClick={closeViewModal}
-                                    className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition cursor-pointer"
+                                    className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg text-sm font-medium transition cursor-pointer"
                                 >
                                     Close
                                 </button>
@@ -815,20 +813,20 @@ function Slots() {
 
                 {isEditModal && editSlot && (
 
-                    <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex justify-center items-center z-50 p-4">
+                    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex justify-center items-center z-50 p-4">
 
-                        <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl">
+                        <div className="bg-slate-800 rounded-2xl w-full max-w-md shadow-2xl border border-slate-700">
 
                             {/* Modal Header */}
-                            <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                            <div className="flex items-center justify-between p-6 border-b border-slate-700">
 
                                 <div>
 
-                                    <h2 className="text-lg font-bold text-gray-800">
+                                    <h2 className="text-lg font-bold text-white">
                                         Edit Slot
                                     </h2>
 
-                                    <p className="text-sm text-gray-400 mt-0.5">
+                                    <p className="text-sm text-slate-400 mt-0.5">
                                         Update slot information
                                     </p>
 
@@ -836,7 +834,7 @@ function Slots() {
 
                                 <button
                                     onClick={closeEditModal}
-                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-600 transition cursor-pointer"
+                                    className="h-8 w-8 flex items-center justify-center rounded-lg hover:bg-slate-700 text-slate-400 hover:text-white transition cursor-pointer"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -852,14 +850,14 @@ function Slots() {
 
                                     <div>
 
-                                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                        <label className="block text-sm font-medium text-slate-300 mb-1.5">
                                             Slot Number
                                         </label>
 
                                         <input
                                             value={editSlotNumber}
                                             onChange={(e) => setEditSlotNumber(e.target.value)}
-                                            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                                            className="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                                             required
                                         />
 
@@ -867,14 +865,14 @@ function Slots() {
 
                                     <div>
 
-                                        <label className="block text-sm font-medium text-gray-700 mb-1.5">
+                                        <label className="block text-sm font-medium text-slate-300 mb-1.5">
                                             Status
                                         </label>
 
                                         <select
                                             value={editSlotStatus}
                                             onChange={(e) => setEditSlotStatus(e.target.value === "true")}
-                                            className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition bg-white"
+                                            className="w-full bg-slate-900 border border-slate-600 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition appearance-none"
                                         >
 
                                             <option value="true">
@@ -892,19 +890,19 @@ function Slots() {
                                 </div>
 
                                 {/* Modal Footer */}
-                                <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-gray-100">
+                                <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-slate-700">
 
                                     <button
                                         type="button"
                                         onClick={closeEditModal}
-                                        className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+                                        className="px-4 py-2 rounded-lg text-sm font-medium text-slate-400 hover:bg-slate-700 hover:text-white transition cursor-pointer"
                                     >
                                         Cancel
                                     </button>
 
                                     <button
                                         type="submit"
-                                        className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium shadow-sm transition cursor-pointer"
+                                        className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition cursor-pointer"
                                     >
                                         Save Changes
                                     </button>
